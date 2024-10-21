@@ -104,6 +104,7 @@ networks:
 
 volumes:
   lambertus-web-data:
+  komar-web-data:
   odoo-web-data:
   odoo-db-data:
 
