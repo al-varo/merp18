@@ -13,6 +13,25 @@ fi
 : ${USER:=${DB_ENV_POSTGRES_USER:=${POSTGRES_USER:='odoo'}}}
 : ${PASSWORD:=${DB_ENV_POSTGRES_PASSWORD:=${POSTGRES_PASSWORD:='odoo'}}}
 
+sed -i '/id: "documentation",/a hide: "true",' /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js
+sed -i '/id: "support",/a hide: "true",' /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js
+sed -i '/id: "settings",/a hide: "true",' /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js
+sed -i '/id: "account",/a hide: "true",' /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js
+
+
+files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" "Odoo" "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/\bOdoo\b/MERP/g'
+files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" 'www.odoo.com' "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/www.odoo.com/www.manzada.net/g'
+files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" 'odoo.com' "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/accounts.odoo.com/accounts.manzada.net/g'
+files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" 'odoo@example.com' "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/odoo@example.com/mail@example.com/g'
+files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" 'Negara-Negara' "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/Negara-Negara/Negara/g'
+files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" 'hari-hari' "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/hari-hari/hari/g'
+files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" 'Vendor Terbai' "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/Vendor Terbai/Vendor Terbaik/g'
+files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" 'Vendor Terbaikk' "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/Vendor Terbaikk/Vendor Terbaik/g'
+files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" 'Kategori Produk Terbai' "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/Kategori Produk Terbai/Kategori Produk Terbaik/g'
+files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" 'Kategori-Kategori Terbaik' "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/Kategori-Kategori Terbaik/Kategori Produk Terbaik/g'
+files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" 'Salespeople Terbaik' "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/Salespeople Terbaik/Salesman Terbaik/g'
+files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" 'Memerintahkan' "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/Memerintahkan/Ordered/g'
+
 DB_ARGS=()
 function check_config() {
     param="$1"
