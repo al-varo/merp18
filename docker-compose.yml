@@ -2,6 +2,7 @@ services:
   lambertus:
     container_name: lambertus
     image: odoo:17
+    user: root
     restart: always
     depends_on:
       - db
@@ -23,6 +24,7 @@ services:
   komar:
     container_name: komar
     image: odoo:17
+    user: root
     restart: always
     depends_on:
       - db
