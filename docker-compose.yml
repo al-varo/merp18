@@ -10,7 +10,7 @@ services:
       - "7201:8072"
     volumes:
       - lambertus-web-data:/usr/lib/python3/dist-packages/odoo
-      - ./custom_core/lambertus/addons/web/static/img:/usr/lib/python3/dist-packages/odoo/addons/web/static/img
+      - ./custom_core/lambertus/web/static/img:/usr/lib/python3/dist-packages/odoo/addons/web/static/img
       - ./entrypoint/lambertus/entrypoint.sh:/entrypoint.sh
       - ./config/lambertus:/etc/odoo
       - ./addons/lambertus:/mnt/extra-addons
@@ -31,7 +31,7 @@ services:
       - "7202:8072"
     volumes:
       - komar-web-data:/usr/lib/python3/dist-packages/odoo
-      - ./custom_core/komar/addons/web/static/img:/usr/lib/python3/dist-packages/odoo/addons/web/static/img
+      - ./custom_core/komar/web/static/img:/usr/lib/python3/dist-packages/odoo/addons/web/static/img
       - ./entrypoint/komar/entrypoint.sh:/entrypoint.sh
       - ./config/komar:/etc/odoo
       - ./addons/komar:/mnt/extra-addons
