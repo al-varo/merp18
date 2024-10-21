@@ -1,0 +1,112 @@
+services:
+  lambertus:
+    container_name: lambertus
+    image: odoo:17
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "6901:8069"
+      - "7201:8072"
+    volumes:
+      - lambertus-web-data:/usr/lib/python3/dist-packages/odoo
+      - ./custom_core/lambertus/addons/web/static/img:/usr/lib/python3/dist-packages/odoo/addons/web/static/img
+      - ./entrypoint/lambertus/entrypoint.sh:/entrypoint.sh
+      - ./config/lambertus:/etc/odoo
+      - ./addons/lambertus:/mnt/extra-addons
+    environment:
+      - PASSWORD_FILE=/run/secrets/postgresql_password
+    secrets:
+      - postgresql_password
+    networks:
+      - odoo_network
+  komar:
+    container_name: komar
+    image: odoo:17
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "6902:8069"
+      - "7202:8072"
+    volumes:
+      - komar-web-data:/usr/lib/python3/dist-packages/odoo
+      - ./custom_core/komar/addons/web/static/img:/usr/lib/python3/dist-packages/odoo/addons/web/static/img
+      - ./entrypoint/komar/entrypoint.sh:/entrypoint.sh
+      - ./config/komar:/etc/odoo
+      - ./addons/komar:/mnt/extra-addons
+    environment:
+      - PASSWORD_FILE=/run/secrets/postgresql_password
+    secrets:
+      - postgresql_password
+    networks:
+      - odoo_network
+  odoo:
+    container_name: odoo
+    image: odoo:8
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8069:8070"
+      - "8072:8073"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./config/odoo:/etc/odoo
+      - ./addons:/mnt/extra-addons
+    environment:
+      - PASSWORD_FILE=/run/secrets/postgresql_password
+    secrets:
+      - postgresql_password
+    networks:
+      - odoo_network
+  nginx:
+      container_name: nginx
+      image: nginx:latest
+      restart: unless-stopped
+      ports:
+          - 80:80
+      volumes:
+          - ./config/nginx:/etc/nginx/conf.d/:rw
+      depends_on:
+          - "odoo"
+      networks:
+          - odoo_network
+  db:
+    image: postgres:13
+    restart: always
+    container_name: postgresql
+    command: -c config_file=/etc/postgresql.conf
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgresql_password
+      - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - ./customPostgresql.conf:/etc/postgresql.conf
+      - ./odoo-db-data:/var/lib/postgresql/data/pgdata
+      - ./init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh    
+    secrets:
+      - postgresql_password
+    ports:
+      - "127.0.0.1:5432:5432"
+    networks:
+      - odoo_network
+    logging:
+      driver: json-file
+      options:
+        max-size: "30m"
+        max-file: "10"
+
+networks:
+  odoo_network:
+    driver: bridge
+
+volumes:
+  lambertus-web-data:
+  odoo-web-data:
+  odoo-db-data:
+
+secrets:
+  postgresql_password:
+    file: odoo_pg_pass
