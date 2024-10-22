@@ -2,7 +2,6 @@ services:
   lambertus:
     container_name: lambertus
     image: odoo:17
-    user: root
     restart: always
     depends_on:
       - db
@@ -24,7 +23,6 @@ services:
   komar:
     container_name: komar
     image: odoo:17
-    user: root
     restart: always
     depends_on:
       - db
@@ -33,7 +31,7 @@ services:
       - "7202:8072"
     volumes:
       - komar-web-data:/var/lib/odoo
-      - ./custom_core/komar/web/static/img:/usr/lib/python3/dist-packages/odoo/addons/web/static/img
+      - ./img/komar:/etc/komar/img
       - ./entrypoint/komar/entrypoint.sh:/entrypoint.sh
       - ./config/komar:/etc/odoo
       - ./addons/komar:/mnt/extra-addons
