@@ -13,12 +13,14 @@ fi
 : ${USER:=${DB_ENV_POSTGRES_USER:=${POSTGRES_USER:='odoo'}}}
 : ${PASSWORD:=${DB_ENV_POSTGRES_PASSWORD:=${POSTGRES_PASSWORD:='odoo'}}}
 
+# Hide specific menu in user menu
+echo "Customize Usermenu ..."
 sed -i '/id: "documentation",/a hide: "true",' /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js
 sed -i '/id: "support",/a hide: "true",' /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js
 sed -i '/id: "settings",/a hide: "true",' /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js
 sed -i '/id: "account",/a hide: "true",' /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js
 
-
+echo "Text debranding ..."
 files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" "Odoo" "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/\bOdoo\b/MERP/g'
 files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" 'www.odoo.com' "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/www.odoo.com/www.manzada.net/g'
 files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" 'odoo.com' "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/accounts.odoo.com/accounts.manzada.net/g'
@@ -31,6 +33,11 @@ files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages
 files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" 'Kategori-Kategori Terbaik' "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/Kategori-Kategori Terbaik/Kategori Produk Terbaik/g'
 files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" 'Salespeople Terbaik' "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/Salespeople Terbaik/Salesman Terbaik/g'
 files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" 'Memerintahkan' "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/Memerintahkan/Ordered/g'
+
+echo "Icon debranding ..."
+yes | cp /etc/lambertus/img/*.png /usr/lib/python3/dist-packages/odoo/addons/web/static/img/
+yes | cp /etc/lambertus/img/*.svg /usr/lib/python3/dist-packages/odoo/addons/web/static/img/
+yes | cp /etc/lambertus/img/*.ico /usr/lib/python3/dist-packages/odoo/addons/web/static/img/
 
 DB_ARGS=()
 function check_config() {
