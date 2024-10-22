@@ -32,7 +32,7 @@ services:
       - "6902:8069"
       - "7202:8072"
     volumes:
-      - komar-web-data:/usr/lib/python3/dist-packages/odoo
+      - komar-web-data:/var/lib/odoo
       - ./custom_core/komar/web/static/img:/usr/lib/python3/dist-packages/odoo/addons/web/static/img
       - ./entrypoint/komar/entrypoint.sh:/entrypoint.sh
       - ./config/komar:/etc/odoo
@@ -85,8 +85,8 @@ services:
       - POSTGRES_USER=postgres
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
       - ./customPostgresql.conf:/etc/postgresql.conf
-      - ./odoo-db-data:/var/lib/postgresql/data/pgdata
       - ./init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh    
     secrets:
       - postgresql_password
