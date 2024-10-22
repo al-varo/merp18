@@ -15,11 +15,11 @@ fi
 
 # Hide specific menu in user menu
 # sed cmd file > /tmp/tmp_sed; cat /tmp/tmp_sed > /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js; rm /tmp/tmp_sed
-echo "Customize Usermenu ..."
-sed '/id: "documentation",/a hide: "true",' /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js > /tmp/tmp_sed; cat /tmp/tmp_sed > /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js; rm /tmp/tmp_sed
-sed '/id: "support",/a hide: "true",' /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js > /tmp/tmp_sed; cat /tmp/tmp_sed > /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js; rm /tmp/tmp_sed
-sed '/id: "settings",/a hide: "true",' /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js > /tmp/tmp_sed; cat /tmp/tmp_sed > /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js; rm /tmp/tmp_sed
-sed '/id: "account",/a hide: "true",' /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js > /tmp/tmp_sed; cat /tmp/tmp_sed > /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js; rm /tmp/tmp_sed
+#echo "Customize Usermenu ..."
+#sed '/id: "documentation",/a hide: "true",' /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js > /tmp/tmp_sed; cat /tmp/tmp_sed > /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js; rm /tmp/tmp_sed
+#sed '/id: "support",/a hide: "true",' /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js > /tmp/tmp_sed; cat /tmp/tmp_sed > /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js; rm /tmp/tmp_sed
+#sed '/id: "settings",/a hide: "true",' /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js > /tmp/tmp_sed; cat /tmp/tmp_sed > /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js; rm /tmp/tmp_sed
+#sed '/id: "account",/a hide: "true",' /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js > /tmp/tmp_sed; cat /tmp/tmp_sed > /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js; rm /tmp/tmp_sed
 
 echo "Text debranding ..."
 files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" "Odoo" "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/\bOdoo\b/MERP/g'
