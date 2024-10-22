@@ -10,7 +10,6 @@ services:
       - "7201:8072"
     volumes:
       - lambertus-web-data:/var/lib/odoo
-      - lambertus-core-data:/usr/lib/python3/dist-packages/odoo
       - ./img/lambertus:/etc/lambertus/img
       - ./entrypoint/lambertus/entrypoint.sh:/entrypoint.sh
       - ./config/lambertus:/etc/odoo
@@ -32,7 +31,6 @@ services:
       - "7202:8072"
     volumes:
       - komar-web-data:/var/lib/odoo
-      - komar-core-data:/usr/lib/python3/dist-packages/odoo
       - ./img/komar:/etc/komar/img
       - ./entrypoint/komar/entrypoint.sh:/entrypoint.sh
       - ./config/komar:/etc/odoo
@@ -105,8 +103,6 @@ networks:
     driver: bridge
 
 volumes:
-  lambertus-core-data:
-  komar-core-data:
   lambertus-web-data:
   komar-web-data:
   odoo-web-data:
