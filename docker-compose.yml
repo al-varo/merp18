@@ -2,7 +2,6 @@ services:
   lambertus:
     container_name: lambertus
     build:
-        dockerfile: Dockerfile
         context: .
     restart: always
     depends_on:
@@ -23,7 +22,6 @@ services:
   komar:
     container_name: komar
     build:
-        dockerfile: Dockerfile
         context: .
     restart: always
     depends_on:
