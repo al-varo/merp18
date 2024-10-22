@@ -108,7 +108,6 @@ COPY ./img/*.png /usr/lib/python3/dist-packages/odoo/addons/web/static/img/
 COPY ./img/*.svg /usr/lib/python3/dist-packages/odoo/addons/web/static/img/
 COPY ./img/*.ico /usr/lib/python3/dist-packages/odoo/addons/web/static/img/
 
-
 # Set permissions and Mount /var/lib/odoo to allow restoring filestore and /mnt/extra-addons for users addons
 RUN chown odoo /etc/odoo/odoo.conf \
     && mkdir -p /mnt/extra-addons \
@@ -122,6 +121,10 @@ EXPOSE 8069 8071 8072
 ENV ODOO_RC /etc/odoo/odoo.conf
 
 COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
+
+# chmod entrypoint.sh wait-for-psql.py to executable
+RUN chmod +x /entrypoint.sh \
+    && chmod +x /usr/local/bin/wait-for-psql.py
 
 # Set default user when running the container
 USER odoo
