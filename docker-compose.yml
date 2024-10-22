@@ -10,8 +10,8 @@ services:
       - "6901:8069"
       - "7201:8072"
     volumes:
-      - lambertus-web-data:/usr/lib/python3/dist-packages/odoo
-      - ./custom_core/lambertus/web/static/img:/usr/lib/python3/dist-packages/odoo/addons/web/static/img
+      - lambertus-web-data:/var/lib/odoo
+      - ./img/lambertus:/etc/lambertus/img
       - ./entrypoint/lambertus/entrypoint.sh:/entrypoint.sh
       - ./config/lambertus:/etc/odoo
       - ./addons/lambertus:/mnt/extra-addons
