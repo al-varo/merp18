@@ -1,8 +1,7 @@
 services:
   lambertus:
     container_name: lambertus
-    build:
-        context: .
+    image: merp:latest
     restart: always
     depends_on:
       - db
@@ -21,8 +20,7 @@ services:
       - odoo_network
   komar:
     container_name: komar
-    build:
-        context: .
+    image: merp:latest
     restart: always
     depends_on:
       - db
