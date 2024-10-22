@@ -1,7 +1,9 @@
 services:
   lambertus:
     container_name: lambertus
-    image: odoo:17
+    build:
+        dockerfile: Dockerfile
+        context: .
     restart: always
     depends_on:
       - db
@@ -10,8 +12,6 @@ services:
       - "7201:8072"
     volumes:
       - lambertus-web-data:/var/lib/odoo
-      - ./img/lambertus:/etc/lambertus/img
-      - ./entrypoint/lambertus/entrypoint.sh:/entrypoint.sh
       - ./config/lambertus:/etc/odoo
       - ./addons/lambertus:/mnt/extra-addons
     environment:
@@ -22,7 +22,9 @@ services:
       - odoo_network
   komar:
     container_name: komar
-    image: odoo:17
+    build:
+        dockerfile: Dockerfile
+        context: .
     restart: always
     depends_on:
       - db
@@ -31,8 +33,6 @@ services:
       - "7202:8072"
     volumes:
       - komar-web-data:/var/lib/odoo
-      - ./img/komar:/etc/komar/img
-      - ./entrypoint/komar/entrypoint.sh:/entrypoint.sh
       - ./config/komar:/etc/odoo
       - ./addons/komar:/mnt/extra-addons
     environment:
