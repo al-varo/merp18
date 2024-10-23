@@ -49,7 +49,7 @@ services:
     volumes:
       - odoo-web-data:/var/lib/odoo
       - ./config/odoo:/etc/odoo
-      - ./addons:/mnt/extra-addons
+      - ./addons/manzada:/mnt/extra-addons
     environment:
       - PASSWORD_FILE=/run/secrets/postgresql_password
     secrets:
