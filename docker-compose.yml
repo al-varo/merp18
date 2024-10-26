@@ -1,7 +1,7 @@
 services:
   lambertus:
     container_name: lambertus
-    image: manzada/merp:17
+    image: manzada/merp:18.0.0
     restart: always
     depends_on:
       - db
@@ -21,7 +21,7 @@ services:
       - odoo_network
   komar:
     container_name: komar
-    image: manzada/merp:17
+    image: manzada/merp:18.0.0
     restart: always
     depends_on:
       - db
