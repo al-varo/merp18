@@ -89,6 +89,9 @@ RUN sed -i '/id: "documentation",/a hide: "true",' /usr/lib/python3/dist-package
     && sed -i '/id: "settings",/a hide: "true",' /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js \
     && sed -i '/id: "account",/a hide: "true",' /usr/lib/python3/dist-packages/odoo/addons/web/static/src/webclient/user_menu/user_menu_items.js
 
+# GPT hanya diizinkan untuk Admin
+RUN sed -i "s/callback: async () => this.openChatGPTDialog(),/callback: async() => {const uid = (Array.isArray(session.user_id) ? session.user_id[0] : session.user_id)  | session.uid;if(uid==2){this.openChatGPTDialog()}},/g" /usr/lib/python3/dist-packages/odoo/addons/web_editor/static/src/js/wysiwyg/wysiwyg.js
+
 # Text debranding
 RUN files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" "Odoo" "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/\bOdoo\b/MERP/g' \
     && files=$(grep -rl --exclude="Read*" --exclude-dir="/usr/lib/python3/dist-packages/odoo/addons/web/static/img" "OdooBot" "/usr/lib/python3/dist-packages/odoo/" | cut -f 1 -d ':' | sort | uniq) && echo $files | xargs sed -i 's/\bOdooBot\b/Rin/g' \
