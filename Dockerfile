@@ -1,5 +1,5 @@
 FROM ubuntu:noble
-MAINTAINER Odoo S.A. <info@odoo.com>
+LABEL org.opencontainers.image.authors="fauzi.mkom@gmail.com"
 
 SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
 
